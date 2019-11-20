@@ -1,0 +1,90 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <header id="head" class="secondary"></header>
+
+    <!-- container -->
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a href="{{ path('site') }}">Home</a></li>
+            <li class="active">About</li>
+        </ol>
+
+        <div class="row">
+
+            <!-- Article main content -->
+            <article class="col-sm-9 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">{{user.username}}</h1> {{ user.coins }} Credits
+                </header>
+
+                <div class="jumbotron top-space">
+                    <div class="container">
+
+                        <h3 class="text-center thin">Nouveau dans la boutique</h3>
+
+                        <div class="row">
+
+                            <div class="col-md-6 col-sm-6 highlight">
+                                <div class="h-caption"><h4>Skins Bateau</h4></div>
+                                <div class="h-body text-center">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, vitae, perferendis, perspiciatis nobis voluptate quod illum soluta minima ipsam ratione quia numquam eveniet eum reprehenderit dolorem dicta nesciunt corporis?</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 highlight">
+                                <div class="h-caption"><h4>Skins Bateau de noel</h4></div>
+                                <div class="h-body text-center">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 highlight">
+                                <div class="h-caption"><h4>Passe de combat</h4></div>
+                                <div class="h-body text-center">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
+                                </div>
+                            </div>
+
+                        </div> <!-- /row  -->
+                            <button class="btn btn-action" type="submit">Allez a la boutique</button>
+                    </div>
+                </div>
+
+
+                <br>
+
+                <div class="jumbotron top-space">
+                    <div class="container">
+                        <div class="h-caption"><h4>Vos stats de vos dernieres partie</h4></div>
+                        <div class="h-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
+                        </div>
+                        <div class="h-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
+                        </div>
+                        <div class="h-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+            <!-- /Article -->
+
+            <!-- Sidebar -->
+            <aside class="col-sm-3 sidebar sidebar-right">
+
+                <div class="widget">
+                    <h4>Parametre</h4>
+
+                    <h4>Messagerie</h4>
+                </div>
+
+            </aside>
+            <!-- /Sidebar -->
+
+        </div>
+    </div>	<!-- /container -->
+{% endblock %}
