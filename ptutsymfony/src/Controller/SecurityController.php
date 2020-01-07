@@ -4,16 +4,20 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="security_registration")
+     * @Route("/register", name="security_registration")
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
@@ -26,6 +30,8 @@ class SecurityController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setCoins(2000);
+            $user->setLevel(0);
             $manager->persist($user);
             $manager->flush();
             return $this->redirectToRoute('security_login');
@@ -36,7 +42,7 @@ class SecurityController extends AbstractController
         ]);
     }
     /**
-     * @Route("/conexion", name="security_login")
+     * @Route("/connexion", name="security_login")
      */
     public function login(){
 
@@ -44,20 +50,21 @@ class SecurityController extends AbstractController
 
     }
     /**
-     * @Route("/deconnexion", name="security_logout")
+     * @Route("/logout", name="security_logout")
      */
     public function logout(){
 
     }
     /**
-     * @Route("/profil", name="security_profil")
+     * @Route("/profile", name="security_profil")
      */
     public function profil(){
-
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+        $produit = $user->getAchat();
         return $this->render('security/profil.html.twig',[
-            'user' => $user
+            'user' => $user,
+            'produits' => $produit
         ]);
     }
 }

@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les produits
+{% endblock %}
+
+{% block body %}
+    <header id="head" class="secondary"></header>
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a href="{{ path('security_profil') }}">Profil</a></li>
+            <li class="active">Boutique</li>
+        </ol>
+
+        <div class="row">
+
+            <article class="col-sm-9 maincontent">
+                <div class="bg-light p-3">
+                    <h1>Les produits</h1>
+                </div>
+                <div class="row">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="tab" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#profile">Skins</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#profile">Crédits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Fond d'écran</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade" id="home">
+                            <div class="jumbotron ">
+                                <h1 class="display-3">Bievenue dans la boutique</h1>
+                                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                                <hr class="my-4">
+                                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade active show" id="profile">
+                            {% for product in products %}
+                                <div class="col-4 mt-4">
+                                    <div class="border border-dark rounded p-2 clearfix">
+                                        <h2>
+                                            {{ product.title }}
+                                            {{ product.category.name }}
+                                            -
+                                            {{ product.price }}
+                                            credits
+                                        </h2>
+                                        <img class="img-fluid rounded" src="{{ product.image }}" alt="Image de {{ product.title }}">
+                                        <hr>
+                                        <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-success float-right">
+                                            <i class="fas fa-shopping-cart mr-1"></i>
+                                            Ajouter
+                                        </a>
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <!-- Sidebar -->
+            <aside class="col-sm-3 sidebar sidebar-right">
+
+                <div class="widget">
+                    <a href="{{ path('cart_index') }}" class="btn btn-success float-right">Panier</a>
+                    <h4>Vos crédits {{ user.coins }} </h4>
+
+                    <h4><a href="{{  path('cart_coins') }}">Acheter des crédits ? </a></h4>
+                </div>
+
+            </aside>
+            <!-- /Sidebar -->
+        </div>
+    </div>
+
+{% endblock %}

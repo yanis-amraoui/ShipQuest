@@ -11,7 +11,7 @@
 
         <ol class="breadcrumb">
             <li><a href="{{ path('site') }}">Home</a></li>
-            <li class="active">Registration</li>
+            <li class="active">Inscription</li>
         </ol>
 
         <div class="row">
@@ -19,33 +19,33 @@
             <!-- Article main content -->
             <article class="col-xs-12 maincontent">
                 <header class="page-header">
-                    <h1 class="page-title">Registration</h1>
+                    <h1 class="page-title">Inscription</h1>
                 </header>
 
                 <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <h3 class="thin text-center">Register a new account</h3>
-                            <p class="text-center text-muted">Lorem ipsum dolor sit amet, <a href="signin.html">Login</a> adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio. </p>
+                            <h3 class="thin text-center">Créer un nouveau compte</h3>
+                            <p class="text-center text-muted">Créez un nouveau compte dès à présent et jouez à Ship Quest sans plus attendre ! </p>
                             <hr>
 
-                                {{ form_start(form) }}
-                                {{ form_row(form.username, {'label': 'Nom dutilisateur','attr' :{ 'placeholder':'username'}}) }}
-                                {{ form_row(form.email, {'label': 'E-mail','attr' :{ 'placeholder':'email'}}) }}
-                                {{ form_row(form.password, {'label': 'Mot de passe','attr' :{ 'placeholder':'password'}}) }}
-                                {{ form_row(form.confirm_password, {'label': 'Mot de passe Confirmation','attr' :{ 'placeholder':'Confirmation Mdp'}}) }}
-                                <hr>
+                            {{ form_start(form) }}
+                            {{ form_row(form.username, {'label': 'Nom d\'utilisateur','attr' :{ 'placeholder':'Username'}}) }}
+                            {{ form_row(form.email, {'label': 'E-mail','attr' :{ 'placeholder':'Email'}}) }}
+                            {{ form_row(form.password, {'label': 'Mot de passe','attr' :{ 'placeholder':'Password'}}) }}
+                            {{ form_row(form.confirm_password, {'label': 'Confirmation du mot de passe ','attr' :{ 'placeholder':'Confirmation Mdp'}}) }}
+                            <hr>
 
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <label class="checkbox">
-                                            <input id="field_terms" onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');" type="checkbox" required name="terms"> I accept the <u> <a href="page_terms.html">Termes et Conditions</a></u>
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button class="btn btn-action" type="submit">Inscription</button>
-                                    </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <label class="checkbox">
+                                        <input id="field_terms" onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');" type="checkbox" required name="terms"> J'accepte les <u> <a href="page_terms.html">Termes et Conditions</a></u>
+                                    </label>
                                 </div>
+                                <div class="col-lg-4 text-right">
+                                    <button class="btn btn-action" type="submit">Inscription</button>
+                                </div>
+                            </div>
                             {{ form_end(form) }}
                         </div>
                     </div>

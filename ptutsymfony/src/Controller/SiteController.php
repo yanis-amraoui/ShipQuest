@@ -79,4 +79,28 @@ class SiteController extends AbstractController
     public function contact(){
         return $this->render('site/contact.html.twig');
     }
+    /**
+     * @Route("/game", name="game")
+     */
+    public function game()
+    {
+        return $this->render('site/game.html.twig');
+    }
+
+
+    /**
+     * @Route("/ptut/web", name="ptut_web")
+     */
+    public function web()
+    {
+        return $this->render('site/ptutweb.html.twig');
+    }
+
+    /**
+     * @Route("/ptut/game", name="ptut_game")
+     */
+    public function info()
+    {
+        return $this->render('site/ptutgame.html.twig');
+    }
 }

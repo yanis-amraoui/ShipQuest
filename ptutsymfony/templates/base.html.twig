@@ -1,196 +1,198 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        {% block stylesheets %}
-            {# 'app' must match the first argument to addEntry() in webpack.config.js #}
-            {{ encore_entry_link_tags('app') }}
 
-            <!-- Renders a link tag (if your module requires any CSS)
-                 <link rel="stylesheet" href="/build/app.css"> -->
-        {% endblock %}
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="shortcut icon" href="{{ asset('images/gt_favicon.png') }}">
-        <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-        <link rel="stylesheet" href="{{ asset('/build/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('/build/font-awesome.min.css') }}">
+<head>
+    <meta charset="UTF-8"> {% block stylesheets %} {# 'app' must match the first argument to addEntry() in webpack.config.js #} {{ encore_entry_link_tags('app') }}
 
-        <!-- Custom styles for our template -->
-        <link rel="stylesheet" href="/build/bootstrap-theme.css" media="screen" >
-        <link rel="stylesheet" href="/build/main.css">
+        <!-- Renders a link tag (if your module requires any CSS)
+                     <link rel="stylesheet" href="/build/app.css"> -->
+    {% endblock %}
+    <title>{% block title %}Bienvenue!{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ asset('images/gt_favicon.png') }}">
+    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="{{ asset('/build/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/build/font-awesome.min.css') }}">
 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    </head>
- {#   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('home') }}">Voiture Bateau</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="/build/bootstrap-theme.css" media="screen">
+    <link rel="stylesheet" href="/build/main.css">
 
-        <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('site') }}">Article</a>
-                </li>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+{#
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ path('home') }}">Voiture Bateau</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                {% if not app.user %}
-                <li class="nav-item">
-                    <a href="{{ path('security_login') }}" class="large material-icons">person</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('site_create') }}">create article</a>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('site') }}">Article</a>
+            </li>
 
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('security_logout') }}" class="nav-link"> Deconnexion
+            {% if not app.user %}
+            <li class="nav-item">
+                <a href="{{ path('security_login') }}" class="large material-icons">person</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('site_create') }}">create article</a>
+
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('security_logout') }}" class="nav-link"> Deconnexion
                     </a>
+            </li>
+            {% endif %}
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>#}
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Button for smallest screens -->
+            <a href="#"></a><img alt="logo" class="img-responsive" src="/build/logo.png" style="height:55px;width:150px;" /></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+                <li class="active"><a href="{{ path('site') }}">Accueil</a></li>
+
+                <li><a href="{{ path('game') }}">Le jeu</a></li>
+                <li><a href="{{ path('article') }}">Article</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Le PTUT <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('ptut_web') }}">Coté Web</a></li>
+                        <li class="active"><a href="{{ path('ptut_game') }}">Coté Jeu</a></li>
+                    </ul>
                 </li>
+                <li><a href="{{ path('site_contact') }}">Contact</a></li>
+                {% if not app.user %}
+                    <li><a class="btn" href="{{ path('security_login') }}">SE CONNECTER / S'INSCRIRE</a></li>
+                {% else %}
+                    <li><a class="btn" href="{{ path('security_profil') }}">Mon Profil</a></li>
+                    <li><a class="btn" href="{{ path('security_logout') }}">LOG OUT</a></li>
                 {% endif %}
 
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
-    </nav>#}
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top headroom" >
-        <div class="container">
-            <div class="navbar-header">
-                <!-- Button for smallest screens -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /.navbar -->
+
+<body>
+<section class="home">
+    {% block body %}{% endblock %}
+</section>
+
+<!-- Social links. @TODO: replace by link/instructions in template -->
+<section id="social">
+    <div class="container">
+        <div class="wrapper clearfix">
+            <!-- AddThis Button BEGIN -->
+            <div class="addthis_toolbox addthis_default_style">
+                <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                <a class="addthis_button_tweet"></a>
+                <a class="addthis_button_linkedin_counter"></a>
+                <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav pull-right">
-                    <li class="active"><a href="{{ path('site') }}">Home</a></li>
-
-                    <li><a href="#">Le jeu</a></li>
-                    <li><a href="{{ path('article') }}">Article</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Le PTUT <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Coté Web</a></li>
-                            <li class="active"><a href="#">Coté Jeu</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="{{ path('site_contact') }}">Contact</a></li>
-                    {% if not app.user %}
-                    <li><a class="btn" href="{{ path('security_login') }}">SIGN IN / SIGN UP</a></li>
-                    {% else %}
-                    <li><a class="btn" href="{{ path('security_profil') }}">Mon Profil</a></li>
-                    <li><a class="btn" href="{{ path('security_logout') }}">LOG OUT</a></li>
-                    {% endif %}
-
-                </ul>
-            </div><!--/.nav-collapse -->
+            <!-- AddThis Button END -->
         </div>
     </div>
-    <!-- /.navbar -->
+</section>
+<!-- /social links -->
+<footer id="footer" class="top-space">
 
-    <body>
-    <section class="home">
-        {% block body %}{% endblock %}
-    </section>
-
-
-
-    <!-- Social links. @TODO: replace by link/instructions in template -->
-    <section id="social">
+    <div class="footer1">
         <div class="container">
-            <div class="wrapper clearfix">
-                <!-- AddThis Button BEGIN -->
-                <div class="addthis_toolbox addthis_default_style">
-                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                    <a class="addthis_button_tweet"></a>
-                    <a class="addthis_button_linkedin_counter"></a>
-                    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+            <div class="row">
+
+                <div class="col-md-3 widget">
+                    <h3 class="widget-title">Contact</h3>
+                    <div class="widget-body">
+                        <p>
+                            <a href="mailto:shipquestcontact@gmail.com">shipquestcontact@gmail.com</a>
+                            <br>
+                            <br> 413 Avenue Gaston Berger
+                            <br> 13100 Aix-en-Provence
+                        </p>
+                    </div>
                 </div>
-                <!-- AddThis Button END -->
+
+                <div class="col-md-3 widget">
+                    <h3 class="widget-title">Suivez nous</h3>
+                    <div class="widget-body">
+                        <p class="follow-me-icons">
+                            <a href="https://twitter.com/quest_ship"><i class="fa fa-twitter fa-2"></i></a>
+                            <a href=""><i class="fa fa-github fa-2"></i></a>
+                            <a href=""><i class="fa fa-facebook fa-2"></i></a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 widget">
+                    <h3 class="widget-title">A propos de nous</h3>
+                    <div class="widget-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
+                        <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+                    </div>
+                </div>
+
             </div>
+            <!-- /row of widgets -->
         </div>
-    </section>
-    <!-- /social links -->
-    <footer id="footer" class="top-space">
+    </div>
 
-        <div class="footer1">
-            <div class="container">
-                <div class="row">
+    <div class="footer2">
+        <div class="container">
+            <div class="row">
 
-                    <div class="col-md-3 widget">
-                        <h3 class="widget-title">Contact</h3>
-                        <div class="widget-body">
-                            <p>+213213123123<br>
-                                <a href="mailto:#">algeriensauvage@tamere.fr</a><br>
-                                <br>
-                                Aix en Provence la rue la vraie
-                            </p>
-                        </div>
+                <div class="col-md-6 widget">
+                    <div class="widget-body">
+                        <p class="simplenav">
+                            <a href="{{ path('site') }}">Accueil</a> |
+                            <a href="about.html">A propos de nous</a> |
+                            <a href="{{ path('site_contact') }}">Contact</a> |
+                            <b><a href="{{ path('security_registration') }}">S'inscrire</a></b>
+                        </p>
                     </div>
+                </div>
 
-                    <div class="col-md-3 widget">
-                        <h3 class="widget-title">Follow us</h3>
-                        <div class="widget-body">
-                            <p class="follow-me-icons">
-                                <a href=""><i class="fa fa-twitter fa-2"></i></a>
-                                <a href=""><i class="fa fa-dribbble fa-2"></i></a>
-                                <a href=""><i class="fa fa-github fa-2"></i></a>
-                                <a href=""><i class="fa fa-facebook fa-2"></i></a>
-                            </p>
-                        </div>
+                <div class="col-md-6 widget">
+                    <div class="widget-body">
+                        <p class="text-right">
+                            Copyright &copy; 2019, Ship Quest, Inc. Tous droits réservés.
+                        </p>
                     </div>
+                </div>
 
-                    <div class="col-md-6 widget">
-                        <h3 class="widget-title"></h3>
-                        <div class="widget-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
-                            <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
-                        </div>
-                    </div>
-
-                </div> <!-- /row of widgets -->
             </div>
+            <!-- /row of widgets -->
         </div>
+    </div>
+</footer>
+{% block javascripts %} {{ encore_entry_script_tags('app') }}
 
-        <div class="footer2">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-6 widget">
-                        <div class="widget-body">
-                            <p class="simplenav">
-                                <a href="{{ path('site') }}">Home</a> |
-                                <a href="about.html">About</a> |
-                                <a href="{{ path('site_contact') }}">Contact</a> |
-                                <b><a href="{{ path('security_registration') }}">Sign up</a></b>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 widget">
-                        <div class="widget-body">
-                            <p class="text-right">
-                                Copyright &copy; 2046, On est dans le futur.
-                            </p>
-                        </div>
-                    </div>
-
-                </div> <!-- /row of widgets -->
-            </div>
-        </div>
-    </footer>
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-
-        <!-- Renders app.js & a webpack runtime.js file
+    <!-- Renders app.js & a webpack runtime.js file
             <script src="/build/runtime.js"></script>
             <script src="/build/app.js"></script> -->
-    {% endblock %}
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="/build/headroom.min.js"></script>
-    <script src="/build/jQuery.headroom.min.js"></script>
-    <script src="/build/template.js"></script>
-    </body>
+{% endblock %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="/build/headroom.min.js"></script>
+<script src="/build/jQuery.headroom.min.js"></script>
+<script src="/build/template.js"></script>
+
+</body>
+
 </html>

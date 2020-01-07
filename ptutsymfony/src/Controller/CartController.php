@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Achat;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -76,23 +77,33 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/valider", name="cart_checkout")
      */
-    public function checkOut(SessionInterface $session,Request $request, ObjectManager $manager){
+    public function checkOut(SessionInterface $session,Request $request, ObjectManager $manager, ProductRepository $repo ){
         $user = $this->getUser();
 
         $userCoins = $user->getCoins();
 
         $total = $session->get('total');
-
+        $panier = $session->get('panier',[]);
         if($userCoins < $total){
-            $message = "Pas assez de sous";
+            $message = "Pas assez de sous, je t'offre 2000 fdp";
+            $user->setCoins(2000);
+            $manager->persist($user);
+            $manager->flush();
         }else{
+            foreach ($panier as $NumProd => $qte)
+            {
+                $produits = $repo->find($NumProd);
+                $user->addAchat($produits);
+            }
             $user->setCoins($userCoins-$total);
             $manager->persist($user);
             $manager->flush();
             $message = "le paiement c'est bien passer ";
         }
 
-        dd($userCoins, $total,$message);
+
+
+        dd($userCoins, $total,$message,$panier);
     }
     /**
      * @Route("/coins", name="cart_coins")

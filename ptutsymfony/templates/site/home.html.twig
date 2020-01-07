@@ -7,9 +7,9 @@
     <header id="head">
         <div class="container">
             <div class="row">
-                <h1 class="lead">Le meilleur jeu de voiture ballon</h1>
-                <p class="tagline">incroyable sa </p>
-                <p><a class="btn btn-default btn-lg" role="button">MORE INFO</a> <a class="btn btn-action btn-lg" role="button">DOWNLOAD NOW</a></p>
+                <h1 class="lead">Le meilleur jeu de stratégie pirate ! </h1>
+                <p class="tagline">Devenez un véritable pirate </p>
+                <p><a class="btn btn-default btn-lg" href="{{ path('game') }}" role="button">PLUS D'INFOS</a> <a class="btn btn-action btn-lg" role="button">TELECHARGEZ MAINTENANT</a></p>
             </div>
         </div>
     </header>
@@ -19,55 +19,42 @@
 
     <div class="container text-center">
         <br> <br>
-        <h2 class="thin">Tester et approuver par Booba et Valbuena</h2>
+        <h2 class="thin">Téléchargez Ship Quest dès à présent et partez à la conquête des océans ! </h2>
         <p class="text-muted">
-            Ma question préférée, qu'est-ce je vais faire de tout cet oseille?
-            Je vais faire de tout cet oseille, je vais faire de tout cet oseille?
-            Ma question préférée, qu'est-ce je vais faire de tout cet oseille?
-            Moi et mes kheys on part sur la lune, amuse-toi bien en Meurthe-et-Moselle
+            Devenez un pirate, et à l'aide de vos bateaux, partez conquérir de nombreuses îles, développez vos ressources et soyez plus malins que votre adversaire afin de le battre et de devenir le pirate ultime !
         </p>
     </div>
-<div class="container">
-    <h2 class="text-center top-space">Nos derniers article</h2>
+    <div class="container">
+        <h2 class="text-center top-space">Le jeu</h2>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <h3>Incroyable mise a jour</h3>
-            <p>Sors les kalash comme à Marseille Bah, ouais Morray Izi</p>
+        <div class="row text-center">
+            <div class="col-sm-6">
+                <h3>Fonctionnement du jeu</h3>
+                <p>Pour voir comment le jeu fonctionne, clique ci-dessous !  </p> <br>
+                <p> <a class="btn btn-default btn-sm" href="{{ path('game') }}" role="button">Jeu</a> </p>
+
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Nos dernières actualités</h3>
+                <p> Tu veux voir les dernières informations sur notre jeu (mise à jour de la boutique, du jeu etc...), clique ci-dessous ! </p>
+                <p> <a class="btn btn-default btn-sm" href="{{ path('article') }}" role="button">Article</a> </p>
+
+            </div>
         </div>
-
-        <div class="col-sm-6">
-            <h3>Second poto pavardddd</h3>
-            <p>
-                Tes négros n'ont pas d'oseille
-                Dans la street tout se monnaye
-                Les vrais savants, on se connaît
-                Anti-hess on se connecte
-                J'ai des gros bras, la chatte à Popeye</p>
+        <div class="row text-center">
+            <div class="col-sm-6">
+                <h3>Notre projet tutoré</h3>
+                <p> Ce jeu est la réalisation de notre projet tutoré. Si tu souhaites en savoir plus sur la réalisation du jeu,
+                    ou bien si tu veux plutôt en connaître un peu plus sur la réalisation du site internet, alors clique sur l'un des boutons ci-dessous ! </p>
+                <p> <a role="button" class="btn btn-default btn-sm" href="{{ path('ptut_game') }}">PTUT Jeu</a>
+                    <a role="button" class="btn btn-default btn-sm" href="{{ path('ptut_web') }}">PTUT Web</a> </p>
+            </div>
+            <div class="col-sm-6">
+                <h3>La boutique </h3>
+                <p> Si tu veux personnaliser ton jeu avec des skins sur ton bateau, ou bien un nouveau fond d'écan pour ton profil, clique ici. </p> <br>
+                <p>  <a role="button" class="btn btn-default btn-sm" href="#">Boutique</a> </p>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <h3>GROUPOILLLL</h3>
-            <p>Crache-moi dessus je te lance une bouteille
-                Difficilement je trouve le sommeil
-                Menton pointé vers le soleil
-                M.O.L.O.T.O.V cocktail
-                Je te baise, je te laisse à l'hôtel</p>
-        </div>
-        <div class="col-sm-6">
-            <h3>FIFU 30, j'ai packer messi 2 fois </h3>
-            <p>
-                Je passe au Lamborghini, Maybach, Phantom tu restes à l'Opel
-                Je suis dans le textile, Sonia Rykiel
-                Je gère le biz à l'américaine
-                Je me taperais bien une Dominicaine
-                Je la mettrais ienb' tout le week-end
-                Je la mettrais ienb' tout le week-end
-                Downtown, je l'ai vue sur Brickell
-                Wallah, je suis frais, je suis nickel
-            </p>
-        </div>
-    </div>
-</div>
 {% endblock %}

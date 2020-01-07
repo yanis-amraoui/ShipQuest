@@ -3,78 +3,78 @@
 
 
 {% block body %}
-<header id="head" class="secondary"></header>
+    <header id="head" class="secondary"></header>
 
-<!-- container -->
-<div class="container">
+    <!-- container -->
+    <div class="container">
 
-    <ol class="breadcrumb">
-        <li><a href="{{ path('site') }}">Home</a></li>
-        <li class="active">About</li>
-    </ol>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('site') }}">Home</a></li>
+            <li class="active">Contact</li>
+        </ol>
 
-    <div class="row">
+        <div class="row">
 
-        <!-- Article main content -->
-        <article class="col-sm-9 maincontent">
-            <header class="page-header">
-                <h1 class="page-title">Nous contacter</h1>
-            </header>
+            <!-- Article main content -->
+            <article class="col-sm-9 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Nous contacter</h1>
+                </header>
 
-            <p>
-
-                T'es une fille ? rebeu de preference envoie nous un message pour pecho notre devellopeur web le bg de la street
-            </p>
-            <br>
-            <form>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" placeholder="Name">
-                    </div>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" placeholder="Email">
-                    </div>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text" placeholder="Phone">
-                    </div>
-                </div>
+                <p>
+                    Tu as des questions à nous poser ? Ou bien un quelconque problème avec notre jeu ? N'hésite pas à nous envoyer un message.
+                </p>
                 <br>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <textarea placeholder="Ta déclaration d'amour ici..." class="form-control" rows="9"></textarea>
+                <form>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" placeholder="Name">
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" placeholder="Email">
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" placeholder="Phone">
+                        </div>
                     </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <textarea placeholder="Ton message ici..." class="form-control" rows="9"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="checkbox"><input type="checkbox"> Je veux souscrire à votre newsletter, pour recevoir des informations à propos des nouveautés du jeu ou de la boutique (skins, fonds d'écrans).</label>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <input class="btn btn-action" type="submit" value="Envoyez message">
+                        </div>
+                    </div>
+                </form>
+
+            </article>
+            <!-- /Article -->
+
+            <!-- Sidebar -->
+            <aside class="col-sm-3 sidebar sidebar-right">
+
+                <div class="widget">
+                    <h4>Adresse de contact :</h4>
+                    <address>
+                        413 Avenue Gaston Berger <br>
+                        13100 Aix-en-Provence
+                    </address>
+                    <h4>Mail : </h4>
+                    <address>
+                        shipquestcontact@gmail.com
+                    </address>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label class="checkbox"><input type="checkbox"> Inscris toi a la neewlster des bg</label>
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <input class="btn btn-action" type="submit" value="Send message">
-                    </div>
-                </div>
-            </form>
 
-        </article>
-        <!-- /Article -->
+            </aside>
+            <!-- /Sidebar -->
 
-        <!-- Sidebar -->
-        <aside class="col-sm-3 sidebar sidebar-right">
-
-            <div class="widget">
-                <h4>L'adresse de yanis</h4>
-                <address>
-                    564 avenue gaston berger chambre 6
-                </address>
-                <h4>Telephone:</h4>
-                <address>
-                    06 65 05 08 16
-                </address>
-            </div>
-
-        </aside>
-        <!-- /Sidebar -->
-
-    </div>
-</div>	<!-- /container -->
+        </div>
+    </div>	<!-- /container -->
 {% endblock %}

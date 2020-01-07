@@ -1,0 +1,8 @@
+{% for produit in produits %}
+{{ produit.id }}
+{{ produit.title }}
+{{ produit.price }}
+{{ produit.image }}
+{{ produit.getcategory().name }}
+{{ produit.color }}
+{% endfor %}

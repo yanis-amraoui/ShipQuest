@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -54,6 +56,16 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $Level;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="UserProduct")
+     */
+    private $Achat;
+
+    public function __construct()
+    {
+        $this->Achat = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,6 +140,32 @@ class User implements UserInterface
     public function setLevel(int $Level): self
     {
         $this->Level = $Level;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getAchat(): Collection
+    {
+        return $this->Achat;
+    }
+
+    public function addAchat(Product $achat): self
+    {
+        if (!$this->Achat->contains($achat)) {
+            $this->Achat[] = $achat;
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Product $achat): self
+    {
+        if ($this->Achat->contains($achat)) {
+            $this->Achat->removeElement($achat);
+        }
 
         return $this;
     }
