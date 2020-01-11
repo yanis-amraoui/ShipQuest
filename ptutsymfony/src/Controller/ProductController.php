@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
@@ -20,6 +23,8 @@ class ProductController extends AbstractController
             'user' => $user
         ]);
     }
+
+
     /**
      * @Route("/boutique1", name="product_index")
      */
@@ -27,8 +32,34 @@ class ProductController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+
+        $UserProduct = new ArrayCollection();
+
+        $UserSkin = new ArrayCollection();
+        $UserBG = new ArrayCollection();
+
+
+        foreach ($user->getAchat() as $wshh){
+            $UserProduct->add($wshh);
+        }
+
+        foreach ($productRepository->findAll() as $data)
+        {
+            if ($UserProduct->contains($data)) {
+        }else{
+                if($data->getCategory()->getName() == "Background"){
+                    $UserBG->add($data);
+                }
+                else{
+                    $UserSkin->add($data);
+                }
+            }
+        }
+
         return $this->render('product/index1.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $UserSkin,
+            'skins' => $UserSkin,
+            'backgrounds' => $UserBG,
             'user' => $user
         ]);
     }

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +21,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="security_registration")
      */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, ProductRepository $repo)
     {
         $user = new User();
 
@@ -31,7 +33,14 @@ class SecurityController extends AbstractController
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user->setCoins(2000);
-            $user->setLevel(0);
+            $user->setLevel(1);
+            $user->setAccountActive(0);
+            $user->setXp(0);
+            $user->setBackgroundActive(0);
+            $user->setActiveLoadBackground(0);
+            $user->setSkinActive(1);
+            $user->addAchat($produits = $repo->find(1));
+            $user->addAchat($produits = $repo->find(1));
             $manager->persist($user);
             $manager->flush();
             return $this->redirectToRoute('security_login');
@@ -61,10 +70,23 @@ class SecurityController extends AbstractController
     public function profil(){
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        $produit = $user->getAchat();
+        $UserSkin = new ArrayCollection();
+        $UserBG = new ArrayCollection();
+
+
+        foreach ($user->getAchat() as $data){
+                if($data->getCategory()->getName() == "Background"){
+                    $UserBG->add($data);
+                }
+                else{
+                    $UserSkin->add($data);
+                }
+            }
+
         return $this->render('security/profil.html.twig',[
             'user' => $user,
-            'produits' => $produit
+            'backgrounds' => $UserBG,
+            'skins' => $UserSkin
         ]);
     }
 }

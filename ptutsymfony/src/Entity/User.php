@@ -62,6 +62,31 @@ class User implements UserInterface
      */
     private $Achat;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $backgroundActive;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $skinActive;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $accountActive;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $activeLoadBackground;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $xp;
+
     public function __construct()
     {
         $this->Achat = new ArrayCollection();
@@ -166,6 +191,66 @@ class User implements UserInterface
         if ($this->Achat->contains($achat)) {
             $this->Achat->removeElement($achat);
         }
+
+        return $this;
+    }
+
+    public function getBackgroundActive(): ?int
+    {
+        return $this->backgroundActive;
+    }
+
+    public function setBackgroundActive(int $backgroundActive): self
+    {
+        $this->backgroundActive = $backgroundActive;
+
+        return $this;
+    }
+
+    public function getSkinActive(): ?int
+    {
+        return $this->skinActive;
+    }
+
+    public function setSkinActive(int $skinActive): self
+    {
+        $this->skinActive = $skinActive;
+
+        return $this;
+    }
+
+    public function getAccountActive(): ?bool
+    {
+        return $this->accountActive;
+    }
+
+    public function setAccountActive(bool $accountActive): self
+    {
+        $this->accountActive = $accountActive;
+
+        return $this;
+    }
+
+    public function getActiveLoadBackground(): ?int
+    {
+        return $this->activeLoadBackground;
+    }
+
+    public function setActiveLoadBackground(int $activeLoadBackground): self
+    {
+        $this->activeLoadBackground = $activeLoadBackground;
+
+        return $this;
+    }
+
+    public function getXp(): ?int
+    {
+        return $this->xp;
+    }
+
+    public function setXp(int $xp): self
+    {
+        $this->xp = $xp;
 
         return $this;
     }

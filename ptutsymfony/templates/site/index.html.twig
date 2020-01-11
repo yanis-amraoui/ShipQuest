@@ -4,18 +4,27 @@
 
 {% block body %}
     <header id="head" class="secondary"></header>
-<section class="container">
 
-    {% for article in articles %}
-    <article>
-        <h2>{{ article.title }} </h2>
+    <section class="container">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('site') }}">Home</a></li>
+            <li class="active">Article</li>
+        </ol>
+    </section>
 
 
-        <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} at {{ article.createdAt | date('H:i') }} </div>
-        <div class="content"><img src="{{article.image}}" alt="">
-            <p>{{ article.content | raw }}</p>
-            <a href="{{ path('site_show', {'id': article.id }) }}" class="btn btn-primary">Lire la suite</a></div>
-    </article>
-    {% endfor %}
-</section>
+    <section class="container text-center top-margin">
+
+        {% for article in articles %}
+            <article class="top-space">
+                <h2>{{ article.title }} </h2>
+
+
+                <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} at {{ article.createdAt | date('H:i') }} </div>
+                <div class="content"><img src="{{article.image}}" alt="" style="width: 600px; lenght:300px">
+                    <p>{{ article.content | raw }}</p>
+                    <a href="{{ path('site_show', {'id': article.id }) }}" class="btn btn-primary">Lire la suite</a></div>
+            </article>
+        {% endfor %}
+    </section>
 {% endblock %}

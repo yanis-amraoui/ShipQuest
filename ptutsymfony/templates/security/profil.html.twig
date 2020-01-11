@@ -3,90 +3,97 @@
 
 
 {% block body %}
-    <header id="head" class="secondary"></header>
+<header id="head" class="secondary"></header>
 
-    <!-- container -->
-    <div class="container">
+<!-- container -->
+<div class="container">
 
-        <ol class="breadcrumb">
-            <li><a href="{{ path('site') }}">Home</a></li>
-            <li class="active">About</li>
-        </ol>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('site') }}">Home</a></li>
+        <li class="active">About</li>
+    </ol>
 
-        <div class="row">
+    <!-- Article main content -->
+    <article class="col-sm-9 maincontent">
+        <header class="page-header">
+            <h1 class="page-title">{{user.username}}</h1> {{ user.coins }} Credits
+        </header>
+    </article>
+</div>
 
-            <!-- Article main content -->
-            <article class="col-sm-9 maincontent">
-                <header class="page-header">
-                    <h1 class="page-title">{{user.username}}</h1> {{ user.coins }} Credits
-                </header>
 
-                <div class="jumbotron top-space">
-                    <div class="container">
+<div class="container">
+    <div class="jumbotron top-space">
+        <div class="container">
 
-                        <h3 class="text-center thin">Nouveau dans la boutique</h3>
+            <h3 class="text-center thin">Votre progression</h3>
 
-                        <div class="row">
+            <div class="row text-center">
 
-                            <div class="col-md-6 col-sm-6 highlight">
-                                <div class="h-caption"><h4>Skins Bateau</h4></div>
-                                <div class="h-body text-center">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, vitae, perferendis, perspiciatis nobis voluptate quod illum soluta minima ipsam ratione quia numquam eveniet eum reprehenderit dolorem dicta nesciunt corporis?</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6 highlight">
-                                <div class="h-caption"><h4>Skins Bateau de noel</h4></div>
-                                <div class="h-body text-center">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6 highlight">
-                                <div class="h-caption"><h4>Passe de combat</h4></div>
-                                <div class="h-body text-center">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
-                                </div>
-                            </div>
-
-                        </div> <!-- /row  -->
-                            <a class="btn btn-action" href="{{ path('product_index') }}">Allez a la boutique</a>
-                    </div>
+                <h4 class="thin top-space"> Niveau {{ user.level }}</h4>
+                <h4 class="thin"> Barre de progression XP </h4>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: calc(0% + {{ user.level }}%);" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
 
 
-                <br>
-
-                <div class="jumbotron top-space">
-                    <div class="container">
-                        <div class="h-caption"><h4>Vos Produits</h4></div>
-                        {% for product in produits %}
-                            <div class="col-4 mt-4">
-                                <div class="border border-dark rounded p-2 clearfix">
-                                    <h2>
-                                        {{ product.title }}
-                                        {{ product.category.name }}
-                                        -
-                                        {{ product.price }}
-                                        credits
-                                    </h2>
-                                    <img class="img-fluid rounded" src="{{ product.image }}" alt="Image de {{ product.title }}">
-                                    <hr>
-                                </div>
-
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </article>
-            <!-- /Article -->
-            <!-- Sidebar -->
-            <aside class="col-sm-3 sidebar sidebar-right">
-                <div class="widget">
-                    <h4>Parametre</h4>
-                    <h4>Messagerie</h4>
-                </div>
-            </aside>
-            <!-- /Sidebar -->
+            </div>
 
         </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="jumbotron top-space">
+            <div class="container">
+
+                <h3 class="text-center thin">Nouveau dans la boutique</h3>
+
+                <div class="row">
+
+                    <div class="col-md-6 col-sm-6 highlight">
+                        <div class="h-caption"><h4>Skins Bateau</h4></div>
+                        <div class="h-body text-center">
+                            <img class="img-rounded" src="http://placehold.it/350x150">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 highlight">
+                        <div class="h-caption"><h4>Fonds d'écran</h4></div>
+                        <div class="h-body text-center">
+                            <img class="img-rounded" src="http://placehold.it/350x150">
+                        </div>
+                    </div>
+
+                </div>
+                <a class="btn btn-action top-space center-block" href="{{ path('product_index') }}">Allez a la boutique</a>
+            </div>
+        </div>
+
+
+        <br>
+
+        <div class="jumbotron top-space">
+            <div class="container">
+                <div class="h-caption"><h4>Vos Produits</h4></div>
+                {% for skin in skins %}
+                    <div class="col-4 mt-4">
+                        <div class="border border-dark rounded p-2 clearfix text-center">
+                            <h2>
+                                {{ skin.title }}
+                                {{ skin.category.name }}
+                            </h2>
+                            <img class="img-fluid rounded" src="{{ skin.image }}" alt="Image de {{ skin.title }}">
+                            <hr>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        </article>
+        <!-- /Article -->
+
     </div>	<!-- /container -->
-{% endblock %}
+    {% endblock %}

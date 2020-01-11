@@ -65,6 +65,7 @@ class CartController extends AbstractController
      * @Route("/panier/remove/{id}", name="cart_remove")
      */
     public function remove($id, SessionInterface $session){
+
         $panier = $session->get('panier',[]);
 
         if(!empty($panier[$id])){

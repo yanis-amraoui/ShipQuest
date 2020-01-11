@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\ProductRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Tests\Fixtures\ToString;
 
 class GameController extends AbstractController
 {
@@ -35,12 +37,19 @@ class GameController extends AbstractController
             $validPassword = $encoder->isPasswordValid($user,$password);
 
             if ($validPassword) {
-                $data = "0\t" . $username . "\t" . $user->getCoins() . "\t" . $user->getLevel() . "\t" ;
+                $data = "0\t" . $username . "\t" . $user->getCoins() . "\t" . $user->getLevel() . "\t"  ;
                 $userproduct = $user->getAchat();
                 foreach ($userproduct as $item)
                 {
                     $data .= $item->getid();
                 }
+
+                if($user->getAccountActive())
+                    $accountActive = 1;
+                else
+                    $accountActive = 0;
+
+                $data .= "\t" . $user->getBackgroundActive() . "\t" . $user->getActiveLoadBackground() . "\t" . $user->getSkinActive() . "\t" . $accountActive ;
             }
             else{
                 $data = "mot de passe invalide";
@@ -58,30 +67,52 @@ class GameController extends AbstractController
 
     }
     /**
-     * @Route("/game/registration", name="game_register")
+     * @Route("/game/savedata", name="game_savedata")
      */
-    public function register(UserPasswordEncoderInterface $encoder){
+    public function Savedata(UserPasswordEncoderInterface $encoder, ObjectManager $manager,ProductRepository $repo){
 
         $username = "";
         $password = "";
 
-        if(isset($_GET["name"]) || isset($_GET["password"])){
-            $username = $_GET["name"];
-            $password = $_GET["password"];
-            $data = $username . $password;
+        if(isset($_POST["name"]) || isset($_POST["password"])){
+            $username = $_POST["name"];
+            $password = $_POST["password"];
 
             $user = $this->getDoctrine()
                 ->getRepository(User::class)
                 ->findOneBy(['username' => $username]);
-
-            $validPassword = $encoder->isPasswordValid($user,$password);
-
-
-            if ($validPassword) {
-                $data = "0\t" . $username;
+            if(!$user){
+                $data = "user non valide";
             }
             else{
-                $data = "mot de passe invalide";
+
+                $validPassword = $encoder->isPasswordValid($user,$password);
+
+                if ($validPassword) {
+
+                    $user->setCoins($_POST["coins"]);
+                    $user->setLevel($_POST["level"]);
+                    $user->setSkinActive($_POST["activeskin"]);
+                    $user->setBackgroundActive($_POST["activebackground"]);
+                    $user->setAccountActive($_POST["activeaccount"]);
+                    $userskin= str_split($_POST["skins"]);
+                    foreach ($userskin as $var){
+                        $produits = $repo->find($var);
+                        $user->addAchat($produits);
+                    }
+
+                    //foreach ($userproduct as $item)
+                    //{
+                    //    $data .= $item->getid();
+                    //}
+                    $data = "MAJ ok" . $_POST["coins"] . $user->getCoins();
+
+                    $manager->persist($user);
+                    $manager->flush();
+                }
+                else{
+                    $data = "mot de passe invalide";
+                }
             }
         }
         else{
@@ -89,7 +120,7 @@ class GameController extends AbstractController
         }
 
 
-        return $this->render('game/register.html.twig', [
+        return $this->render('game/login.html.twig', [
             'data' => $data
         ]);
 

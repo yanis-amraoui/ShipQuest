@@ -20,42 +20,61 @@
                 </div>
                 <div class="row">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item ">
-                            <a class="nav-link" data-toggle="tab" href="#home">Home</a>
+                        <li class="nav-item active show">
+                            <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#profile">Skins</a>
+                            <a class="nav-link" data-toggle="tab" href="#skins">Skins</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#profile">Crédits</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Fond d'écran</a>
+                            <a class="nav-link" href="#background" data-toggle="tab">Fonds d'écran</a>
                         </li>
                     </ul>
                     <div id="myTabContent" class="tab-content">
-                        <div class="tab-pane fade" id="home">
+                        <div class="tab-pane active" id="home">
                             <div class="jumbotron ">
-                                <h1 class="display-3">Bievenue dans la boutique</h1>
-                                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                                <h1 class="display-3">Bienvenue dans la boutique !</h1>
+                                <p class="lead top-space">Vous trouverez ici tous les nouveaux skins et fonds d'écrans du jeu.</p>
                                 <hr class="my-4">
-                                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                                <p>Vous aurez besoin de crédits pour acheter tout ce dont vous avez besoin pour votre profil de jeu !</p>
                             </div>
                         </div>
-                        <div class="tab-pane fade active show" id="profile">
-                            {% for product in products %}
+                        <div class="tab-pane fade" id="skins">
+                            {% for skin in skins %}
                                 <div class="col-4 mt-4">
-                                    <div class="border border-dark rounded p-2 clearfix">
+                                    <div class="border border-dark rounded p-2 clearfix text-center">
                                         <h2>
-                                            {{ product.title }}
-                                            {{ product.category.name }}
+                                            {{ skin.title }}
+                                            {{ skin.category.name }}
                                             -
-                                            {{ product.price }}
+                                            {{ skin.price }}
                                             credits
                                         </h2>
-                                        <img class="img-fluid rounded" src="{{ product.image }}" alt="Image de {{ product.title }}">
+                                        <img class="img-fluid rounded" style="width:600px; lenght:300px;" src="{{ skin.image }}" alt="Image de {{ skin.title }}">
                                         <hr>
-                                        <a href="{{ path('cart_add', {'id' : product.id}) }}" class="btn btn-success float-right">
+                                        <a href="{{ path('cart_add', {'id' : skin.id}) }}" class="btn btn-success float-right">
+                                            <i class="fas fa-shopping-cart mr-1"></i>
+                                            Ajouter
+                                        </a>
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="tab-pane fade" id="background">
+                            {% for background in backgrounds %}
+                                <div class="col-4 mt-4">
+                                    <div class="border border-dark rounded p-2 clearfix text-center">
+                                        <h2>
+                                            {{ background.title }}
+                                            {{ background.category.name }}
+                                            -
+                                            {{ background.price }}
+                                            credits
+                                        </h2>
+                                        <img class="img-fluid rounded" style="width:600px; lenght:300px;" src="{{ background.image }}" alt="Image de {{ background.title }}">
+                                        <hr>
+                                        <a href="{{ path('cart_add', {'id' : background.id}) }}" class="btn btn-success float-right">
                                             <i class="fas fa-shopping-cart mr-1"></i>
                                             Ajouter
                                         </a>
@@ -68,14 +87,28 @@
                 </div>
             </article>
             <!-- Sidebar -->
-            <aside class="col-sm-3 sidebar sidebar-right">
+            <aside class="col-sm-3 sidebar sidebar-right text-center">
 
                 <div class="widget">
                     <a href="{{ path('cart_index') }}" class="btn btn-success float-right">Panier</a>
-                    <h4>Vos crédits {{ user.coins }} </h4>
-
-                    <h4><a href="{{  path('cart_coins') }}">Acheter des crédits ? </a></h4>
+                    <h4>Vos crédits : {{ user.coins }} </h4>
                 </div>
+
+                <div class="card mb-3 top-space" style="border-radius: revert; border-color: #2e3136; border-width: thick">
+                    <h3 class="card-header">Besoin de crédits ?</h3>
+                    <div class="card-body"></div>
+                    <img style="height: 200px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158bd1d28ef%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158bd1d28ef%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22129.359375%22%20y%3D%2297.35%22%3EImage%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image">
+                    <div class="card-body">
+                        <p class="card-text top-margin">Acheter des crédits pour en profiter dans la boutique, et profitez d'offres spéciales...</p>
+                    </div>
+                    <ul class="list-group list-group-flush top-margin">
+                        <li class="list-group-item">500 crédits pour 4.99€</li>
+                        <li class="list-group-item">1200 crédits pour 9.99€</li>
+                        <li class="list-group-item">2500 crédits pour 19.99€</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{{  path('cart_coins') }}" class="card-link">Achetez des crédits</a>
+                    </div>
 
             </aside>
             <!-- /Sidebar -->
@@ -83,3 +116,4 @@
     </div>
 
 {% endblock %}
+
