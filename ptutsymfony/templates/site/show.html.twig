@@ -4,13 +4,15 @@
 
 {% block body %}
     <header id="head" class="secondary"></header>
-    <section class="container">
+
+    <section class="container text-center">
 
 <article>
     <h2>{{article.title}}</h2>
-    <div class="metadata">eecrit le {{ article.createdAt | date('d/m/Y') }} a {{ article.createdAt | date('H:i') }}</div>
+    <div class="metadata">écrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }}</div>
     <div class="content">
         <img src="{{article.image}}" alt="">
+        <hr class="divider">
         <p>{{ article.content | raw }}</p>
     </div>
 </article>

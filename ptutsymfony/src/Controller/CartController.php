@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CartController extends AbstractController
 {
     /**
-     * @Route("/panier", name="cart_index")
+     * @Route("/cart", name="cart_index")
      */
     public function index(SessionInterface $session, ProductRepository $productRepository)
     {
@@ -43,7 +43,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/panier/add/{id}", name="cart_add")
+     * @Route("/cart/add/{id}", name="cart_add")
      */
     public function add ($id, SessionInterface $session){
 
@@ -62,7 +62,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/panier/remove/{id}", name="cart_remove")
+     * @Route("/cart/remove/{id}", name="cart_remove")
      */
     public function remove($id, SessionInterface $session){
 
@@ -76,7 +76,7 @@ class CartController extends AbstractController
         return $this->redirectToRoute("cart_index");
     }
     /**
-     * @Route("/panier/valider", name="cart_checkout")
+     * @Route("/cart/checkout", name="cart_checkout")
      */
     public function checkOut(SessionInterface $session,Request $request, ObjectManager $manager, ProductRepository $repo ){
         $user = $this->getUser();
@@ -85,11 +85,11 @@ class CartController extends AbstractController
 
         $total = $session->get('total');
         $panier = $session->get('panier',[]);
-        if($userCoins < $total){
-            $message = "Pas assez de sous, je t'offre 2000 fdp";
-            $user->setCoins(2000);
-            $manager->persist($user);
-            $manager->flush();
+        if(empty($panier)){
+            $message = "Vous n'avez aucun article dans le panier ! Veuillez retourner à la boutique.";
+        }
+        else if($userCoins < $total){
+            $message = "Tu n'as pas assez de crédits ! Passe faire un tour à la boutique !";
         }else{
             foreach ($panier as $NumProd => $qte)
             {
@@ -99,12 +99,12 @@ class CartController extends AbstractController
             $user->setCoins($userCoins-$total);
             $manager->persist($user);
             $manager->flush();
-            $message = "le paiement c'est bien passer ";
+            $message = "Le paiement s'est bien déroulé, il vous reste : "  . $userCoins . " crédits.";
         }
 
-
-
-        dd($userCoins, $total,$message,$panier);
+        return $this->render('cart/checkout.html.twig', [
+        'data' => $message]
+           );
     }
     /**
      * @Route("/coins", name="cart_coins")
