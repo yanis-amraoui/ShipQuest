@@ -104,6 +104,7 @@ class SiteController extends AbstractController
         return $this->render('site/ptutgame.html.twig');
     }
 
+
     /**
      * @Route("/about", name="site_about")
      */
