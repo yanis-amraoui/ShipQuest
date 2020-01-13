@@ -99,7 +99,7 @@ class CartController extends AbstractController
             $user->setCoins($userCoins-$total);
             $manager->persist($user);
             $manager->flush();
-            $message = "Le paiement s'est bien déroulé, il vous reste : "  . $userCoins . " crédits.";
+            $message = "Le paiement s'est bien déroulé, il vous reste : "  . $user->getCoins() . " crédits.";
         }
 
         return $this->render('cart/checkout.html.twig', [
