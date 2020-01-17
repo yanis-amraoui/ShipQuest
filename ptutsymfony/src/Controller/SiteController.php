@@ -21,6 +21,7 @@ class SiteController extends AbstractController
     {
         $article = $repo->findAll();
 
+
         return $this->render('site/index.html.twig', [
             'articles' => $article
         ]);
@@ -31,6 +32,7 @@ class SiteController extends AbstractController
      */
     public function home()
     {
+        $pdfPath = $this->getParameter('dir.downloads').'/sample.pdf';
         return $this->render('site/home.html.twig');
     }
 

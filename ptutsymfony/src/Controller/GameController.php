@@ -49,7 +49,7 @@ class GameController extends AbstractController
                 else
                     $accountActive = 0;
 
-                $data .= "\t" . $user->getBackgroundActive() . "\t" . $user->getActiveLoadBackground() . "\t" . $user->getSkinActive() . "\t" . $accountActive ;
+                $data .= "\t" . $user->getBackgroundActive() . "\t" . $user->getActiveLoadBackground() . "\t" . $user->getSkinActive() . "\t" . $user->getXp() ;
             }
             else{
                 $data = "mot de passe invalide";

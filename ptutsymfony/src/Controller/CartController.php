@@ -24,15 +24,14 @@ class CartController extends AbstractController
 
         foreach ($panier as $id => $quantity){
             $panierWithData[] = [
-                'product' => $productRepository->find($id),
-                'quantity' => $quantity
+                'product' => $productRepository->find($id)
             ];
         }
 
         $total = 0;
 
         foreach ($panierWithData as $item){
-            $totalItem = $item['product']->getPrice() * $item['quantity'];
+            $totalItem = $item['product']->getPrice();
             $total +=$totalItem;
         }
         $session->set('total', $total);
@@ -50,11 +49,8 @@ class CartController extends AbstractController
 
         $panier = $session->get('panier', []);
 
-        if(!empty($panier[$id])){
-            $panier[$id]++;
-        }else{
-            $panier[$id] = 1;
-        }
+        $panier[$id] = 1;
+
         $session->set('panier', $panier);
 
        return $this->redirectToRoute("cart_index");

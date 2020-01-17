@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="security_registration")
      */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, ProductRepository $repo)
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, ProductRepository $repo, \Swift_Mailer $mailer)
     {
         $user = new User();
 
@@ -43,7 +43,22 @@ class SecurityController extends AbstractController
             $user->addAchat($produits = $repo->find(1));
             $manager->persist($user);
             $manager->flush();
+
+            $message = (new \Swift_Message('Bienvenue chez ShipQuest'))
+                ->setFrom('Welcome@Shipquest.fr')
+                ->setTo($user->getEmail())
+                ->setContentType("text/html")
+                ->setBody(
+                    $this->renderView(
+                        'email/registrationmail.html.twig'
+                    )
+                )
+            ;
+            $mailer->send($message);
+
+
             return $this->redirectToRoute('security_login');
+
         }
 
         return $this->render('security/registration.html.twig', [
@@ -55,6 +70,7 @@ class SecurityController extends AbstractController
      */
     public function login(){
 
+
         return $this->render('security/login.html.twig');
 
     }
@@ -64,10 +80,58 @@ class SecurityController extends AbstractController
     public function logout(){
 
     }
+
+    /**
+     * @Route("/password", name="security_password")
+     */
+    public function passwordLost(){
+        return $this->render('security/password.html.twig');
+    }
+    /**
+     * @Route("/passwordOk", name="security_passwordOk")
+     */
+    public function passwordSend(UserRepository $repository,  \Swift_Mailer $mailer, ObjectManager $manager,UserPasswordEncoderInterface $encoder){
+
+
+        $user = $repository->findOneBy(array('email'=> $_POST['_username']));
+        if(!$user){
+            $data = "Aucun utilisateur avec le mail";
+        }else {
+            $randomString = '';
+            $allowedCharacters='0123456789abcdefgh';
+            for (
+                $i = 0, $allowedMaxIdx = mb_strlen($allowedCharacters) - 1;
+                $i < 10;
+                $i ++
+            ) {
+                $randomString .= $allowedCharacters[random_int(0, $allowedMaxIdx)];
+            }
+            $hash = $encoder->encodePassword($user, $randomString);
+            $user->setPassword($hash);
+            $manager->persist($user);
+            $manager->flush();
+            $message = (new \Swift_Message('Bienvenue chez ShipQuest'))
+                ->setFrom('MDP@Shipquest.fr')
+                ->setTo($user->getEmail())
+                ->setContentType("text/html")
+                ->setBody(
+                    $this->renderView(
+                        'email/password.html.twig', ['user' => $user, 'password' =>$randomString ]
+                    )
+                );
+            $mailer->send($message);
+            $data  = "Votre mot de passe à été envoyé a l'adresse suivante : " . $user->getEmail();
+
+        }
+        return $this->render('security/passwordSend.html.twig' , [
+            'user' => $user,
+            'data' => $data
+        ]);
+    }
     /**
      * @Route("/profile", name="security_profil")
      */
-    public function profil(){
+    public function profil( \Swift_Mailer $mailer){
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
         $UserSkin = new ArrayCollection();
@@ -88,5 +152,6 @@ class SecurityController extends AbstractController
             'backgrounds' => $UserBG,
             'skins' => $UserSkin
         ]);
+
     }
 }

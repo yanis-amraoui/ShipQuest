@@ -21,8 +21,8 @@
 
 
                 <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} at {{ article.createdAt | date('H:i') }} </div>
-                <div class="content"><img src="{{article.image}}" alt="" style="width: 600px; lenght:300px">
-                    <p>{{ article.content | raw }}</p>
+                <div class="content"><img src="{{asset('build/images/'  ~ article.image ~  '.jpg')}}" alt="" style="width: 30%">
+                    <p></p>
                     <a href="{{ path('site_show', {'id': article.id }) }}" class="btn btn-primary">Lire la suite</a></div>
             </article>
         {% endfor %}

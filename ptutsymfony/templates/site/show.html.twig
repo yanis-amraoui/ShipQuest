@@ -11,7 +11,7 @@
     <h2>{{article.title}}</h2>
     <div class="metadata">écrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }}</div>
     <div class="content">
-        <img src="{{article.image}}" alt="">
+        <img src="{{asset('build/images/'  ~ article.image ~  '.jpg')}}" alt="" style="width: 40%">
         <hr class="divider">
         <p>{{ article.content | raw }}</p>
     </div>
